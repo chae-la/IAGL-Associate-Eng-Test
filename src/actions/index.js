@@ -10,15 +10,14 @@ export function fetchTodos() {
 }
 
 export function addTodo(newTodo) {
-  return function(dispatch) {
-    return axios
-      .post("http://localhost:9091/api/todo", newTodo)
-      .then(({ data }) => {
-        dispatch(setTodos(data)); 
-      })
-      .catch((err) => {
-        console.error("Error adding todo:", err);
-      });
+  return async (dispatch) => {
+    try {
+      const { data } = await axios
+        .post("http://localhost:9091/api/todo", newTodo);
+      dispatch(setTodos(data));
+    } catch (err) {
+      console.error("Error adding todo:", err);
+    }
   };
 }
 

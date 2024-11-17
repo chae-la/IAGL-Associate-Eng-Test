@@ -1,25 +1,24 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { fetchTodos, addTodo } from "../actions/index"; 
-
+import { addTodo } from "../actions/index";
 
 const AddTodo = ({ addTodo, fetchTodos }) => {
   const [task, setTask] = useState("");
 
   const handleInput = (e) => {
-    setTask(e.target.value); 
+    setTask(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (task.trim()) {
       const newTodo = { task };
-  
+
       try {
         await addTodo(newTodo);
-        fetchTodos(); 
-        setTask(""); 
-        console.log("Task Added")
+        fetchTodos();
+        setTask("");
+        console.log("Task Added");
       } catch (err) {
         console.error("Error adding todo:", err);
       }
@@ -27,7 +26,6 @@ const AddTodo = ({ addTodo, fetchTodos }) => {
       alert("Please enter a task");
     }
   };
-  
 
   return (
     <form onSubmit={handleSubmit} className="add-todo">
@@ -45,4 +43,4 @@ const AddTodo = ({ addTodo, fetchTodos }) => {
   );
 };
 
-export default connect(null, { addTodo, fetchTodos })(AddTodo);
+export default connect(null, { addTodo })(AddTodo);
