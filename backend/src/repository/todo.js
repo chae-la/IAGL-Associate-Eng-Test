@@ -13,6 +13,4 @@ module.exports = {
   addTodos: (newTodo) => {
     todoList.todos.push(newTodo)
   }
-
-
 };
