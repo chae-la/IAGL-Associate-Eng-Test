@@ -1,5 +1,14 @@
 .todo-app {
     font-family: sans-serif;
+    text-align: center;
+    padding-top: 2rem;
+    
+}
+.todo-title{
+background-color: rgb(5, 204, 255);
+padding: 2rem;
+font-size: 3rem;
+margin: 0 4rem
 }
 
 /** add todo **/
