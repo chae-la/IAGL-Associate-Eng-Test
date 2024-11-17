@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component} from "react";
 import Todo from "../Todo/Todo";
 import { fetchTodos } from "../../actions";
 import { connect } from "react-redux";

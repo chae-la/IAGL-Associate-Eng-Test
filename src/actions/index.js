@@ -9,6 +9,19 @@ export function fetchTodos() {
   };
 }
 
+export function addTodo(newTodo) {
+  return function(dispatch) {
+    return axios
+      .post("http://localhost:9091/api/todo", newTodo)
+      .then(({ data }) => {
+        dispatch(setTodos(data)); 
+      })
+      .catch((err) => {
+        console.error("Error adding todo:", err);
+      });
+  };
+}
+
 function setTodos(data) {
   return {
     type: FETCH_TODOS,

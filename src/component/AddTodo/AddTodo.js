@@ -1,11 +1,47 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { fetchTodos, addTodo } from "../../actions"; 
 import "./AddTodo.css";
 
-const AddTodo = () => {
-const [task, setTask] = useState()
-    const handleAdd = () =>{
+const AddTodo = ({ addTodo, fetchTodos }) => {
+  const [task, setTask] = useState("");
 
+  const handleInput = (e) => {
+    setTask(e.target.value); 
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (task.trim()) {
+      const newTodo = { task };
+
+      try {
+        await addTodo(newTodo);
+        fetchTodos();
+        setTask(""); 
+      } catch (err) {
+        console.error("Error adding todo:", err);
+      }
+    } else {
+      alert("Please enter a task"); 
     }
-return (
-    <div className="add-todo">
-        <input type='text' className="add-todo-input" placeholder="Enter Task" onChan
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="add-todo">
+      <input
+        type="text"
+        value={task}
+        className="add-todo-input"
+        placeholder="Enter Task"
+        onChange={handleInput}
+      />
+      <button type="submit" className="add-todo-button">
+        +
+      </button>
+    </form>
+  );
+};
+
+export default connect(null, { addTodo, fetchTodos })(AddTodo);
